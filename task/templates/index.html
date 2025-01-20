@@ -13,7 +13,17 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- custom styles -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    <style>
+        .column {
+            float: left;
+            width: 50%;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,15 +34,52 @@
             </div>
         </div>
 
-        
-
         <!-- Columns for to-do and done go here -->
-        <h1>Uncompleted Tasks</h1>
-        {% block Uncompleted %}
-        
-        {% endblock %}
-     
+         <h2>To Do</h2>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Due</th>
+                <th>Task</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+              <tbody>
+                {% for task in uncompleted_tasks %}
+                    <tr>
+                        <td>{{ task.due_date }}</td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.category }}</td>
+                        <td><a class="checkbox-btn" href="#"><i class="fa-regular fa-square"></i></a> <a class=".delete-btn" href="#"><i class="fa-solid fa-trash"></i></a> </td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+        </table>
 
+        <h2>Done</h2>
+        <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th>Due</th>
+                <th>Task</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+              <tbody>
+                {% for task in completed_tasks %}
+                    <tr>
+                        <td>{{ task.due_date }}</td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.category }}</td>
+                        <td><a class="checkbox-btn" href="#"><i class="fa-regular fa-square-check"></i></a> <a class=".delete-btn" href="#"><i class="fa-solid fa-trash"></i></a> </td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+        </table>
+            
+        </div>
 
     </div>
 
